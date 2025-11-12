@@ -20,6 +20,16 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@app/auth-lib/*": ["libs/auth-lib/src/*"],
+      "@app/common/*": ["libs/common/src/*"],
+      "@app/database/*": ["libs/database/src/*"],
+      "@app/utils/*": ["libs/utils/src/*"],
+      "@app/api-gateway/*": ["apps/api-gateway/src/*"],
+      "@app/auth-service/*": ["apps/auth-service/src/*"],
+      "@app/order-service/*": ["apps/order-service/src/*"],
+      "@app/notification-service/*": ["apps/notification-service/src/*"]
+    }
   }
 }

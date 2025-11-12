@@ -1,0 +1,9 @@
+import { NestFactory } from '@nestjs/core';
+import { OrderServiceModule } from './order-service.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(OrderServiceModule);
+  await app.listen(process.env.port ?? 3003);
+  console.log('order-service start done');
+}
+bootstrap();
