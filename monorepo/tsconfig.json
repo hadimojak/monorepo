@@ -22,12 +22,6 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@app/temp": [
-        "libs/temp/src"
-      ],
-      "@app/temp/*": [
-        "libs/temp/src/*"
-      ],
       "@app/user": [
         "libs/user/src"
       ],

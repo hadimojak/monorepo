@@ -37,15 +37,6 @@
         "tsConfigPath": "apps/monorepo/tsconfig.app.json"
       }
     },
-    "temp": {
-      "type": "library",
-      "root": "libs/temp",
-      "entryFile": "index",
-      "sourceRoot": "libs/temp/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/temp/tsconfig.lib.json"
-      }
-    },
     "user": {
       "type": "library",
       "root": "libs/user",
