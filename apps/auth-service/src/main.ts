@@ -7,6 +7,6 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.setGlobalPrefix('auth');
   await app.listen(process.env.port ?? 3001);
-  console.log('auth-service start done at http://localhost:3001');
+  console.log('auth-service start done at http://localhost:3001/auth');
 }
 bootstrap();

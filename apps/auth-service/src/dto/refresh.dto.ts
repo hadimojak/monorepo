@@ -1,7 +1,6 @@
-import { IsUUID } from 'class-validator';
-import type { UUID } from 'crypto';
+import { IsString } from 'class-validator';
 
 export class RefreshDto {
-  @IsUUID()
-  refreshToken: UUID;
+  @IsString()
+  refreshToken: string;
 }

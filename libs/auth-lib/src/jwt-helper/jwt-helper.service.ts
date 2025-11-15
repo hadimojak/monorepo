@@ -3,16 +3,15 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtService, JwtOptionsFactory } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
 import type { UUID } from 'crypto';
 
 export type JwtPayload = { sub: UUID; email: string };
 
 export const ACCESS_TOKEN_TTL =
-  Number(process.env.ACCESS_TOKEN_TTL) ?? 15 * 60 * 1000;
+  <string>process.env.ACCESS_TOKEN_TTL ?? '15m';
 export const REFRESH_TOKEN_TTL =
-  Number(process.env.REFRESH_TOKEN_TTL) ??
-  7 * 24 * 60 * 60 * 1000;
+  <string>process.env.REFRESH_TOKEN_TTL ?? '7d';
 export const ACCESS_TOKEN_SECRET =
   <string>process.env.ACCESS_TOKEN_SECRET ?? 'dev_access_secret';
 export const REFRESH_TOKEN_SECRET =
@@ -46,19 +45,21 @@ export class jwtHelperService {
   async signAccess(payload: JwtPayload): Promise<string> {
     return this.jwtService.signAsync(payload, {
       secret: ACCESS_TOKEN_SECRET,
-      expiresIn: ACCESS_TOKEN_TTL,
+      expiresIn: '15m',
     });
   }
 
   async signRefresh(payload: JwtPayload): Promise<string> {
     return this.jwtService.signAsync(payload, {
       secret: REFRESH_TOKEN_SECRET,
-      expiresIn: REFRESH_TOKEN_TTL,
+      expiresIn: '7d',
     });
   }
 
   async verifyRefresh(token: string): Promise<JwtPayload> {
     try {
+      console.log({ token });
+
       return await this.jwtService.verifyAsync<JwtPayload>(
         token,
         {
@@ -86,11 +87,21 @@ export class jwtHelperService {
       this.signAccess(payload),
       this.signRefresh(payload),
     ]);
+
     return {
       accessToken,
       refreshToken,
-      expiresIn: new Date(Date.now() + ACCESS_TOKEN_TTL),
+      expiresIn: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       payload,
     };
+  }
+
+  async verifyAccess(token: string) {
+    return this.jwtService.verifyAsync<{
+      sub: string;
+      email: string;
+    }>(token, {
+      secret: ACCESS_TOKEN_SECRET,
+    });
   }
 }

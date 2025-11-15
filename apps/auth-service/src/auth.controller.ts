@@ -3,6 +3,8 @@ import {
   Post,
   Body,
   HttpCode,
+  Get,
+  Headers,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -42,5 +44,10 @@ export class AuthController {
   @Post('forget-password')
   forgetPassword(@Body() body: ForgetPasswordDto) {
     return this.authService.forgetPassword(body.email);
+  }
+
+  @Get('me')
+  me(@Headers('authorization') authorization?: string) {
+    return this.authService.protectMe(authorization);
   }
 }

@@ -68,8 +68,14 @@ export class AuthService {
   }
 
   async refresh(refreshToken: string) {
+    console.log(refreshToken);
+
+    console.log('heeeeeeeeeerrre');
+
     const payload =
       await this.jwtHelper.verifyRefresh(refreshToken);
+
+    console.log({ payload });
 
     if (!this.jwtHelper.has(payload.sub, refreshToken)) {
       throw new UnauthorizedException('refresh token revoked');
@@ -105,13 +111,29 @@ export class AuthService {
 
   async forgetPassword(email: string) {
     const user = this.usersByEmail.get(email);
+    console.log({ user });
+
     if (user) {
       const { accessToken: resetToken } =
         await this.jwtHelper.issueTokenPair(user.id, email);
+      console.log(resetToken);
+
       return { message: 'reset link sent', resetToken };
     }
     return {
-      message: 'if that email exicts a rese link has been sent',
+      message: 'if that email exist a reset link has been sent',
     };
+  }
+
+  async protectMe(bearer?: string) {
+    if (!bearer?.startsWith('Bearer ')) {
+      throw new UnauthorizedException(
+        'Access token is required',
+      );
+    }
+
+    const token = bearer.slice(7);
+    const payload = await this.jwtHelper.verifyAccess(token);
+    return { id: payload.sub, email: payload.email };
   }
 }
