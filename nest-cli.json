@@ -4,13 +4,13 @@
   "monorepo": true,
   "root": "apps",
   "projects": {
-    "api-gateway": {
+    "product-service": {
       "type": "application",
-      "root": "apps/api-gateway",
+      "root": "apps/product-service",
       "entryFile": "main",
-      "sourceRoot": "apps/api-gateway/src",
+      "sourceRoot": "apps/product-service/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/api-gateway/tsconfig.app.json"
+        "tsConfigPath": "apps/product-service/tsconfig.app.json"
       }
     },
     "auth-lib": {

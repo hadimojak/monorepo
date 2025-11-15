@@ -4,7 +4,7 @@ type Product {
   desc: String!
   price: Float!
   createdAt: String!
-  updatedAt: String!
+  updatedAt: String
 }
 
 type PaginatedProducts {
@@ -27,13 +27,13 @@ input PagingInput {
 
 input CreateProductInput {
   name: String!
-  description: String
+  desc: String
   price: Float!
 }
 
 input UpdateProductInput {
   name: String
-  description: String
+  desc: String
   price: Float
 }
 

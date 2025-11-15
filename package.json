@@ -17,13 +17,15 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./apps/orc/test/jest-e2e.json",
-    "start:gateway:dev": "nest start api-gateway --watch",
+    "start:product:dev": "nest start product-service --watch",
     "start:auth:dev": "nest start auth-service --watch",
     "start:notif:dev": "nest start notification-service --watch",
     "start:order:dev": "nest start order-service --watch",
-    "start:all": "npm-run-all --parallel start:gateway:dev start:auth:dev start:notif:dev start:order:dev"
+    "start:all": "npm-run-all --parallel start:product:dev start:auth:dev start:notif:dev start:order:dev"
   },
   "dependencies": {
+    "@apollo/server": "^5.1.0",
+    "@as-integrations/express5": "^1.1.2",
     "@ljharb/tsconfig": "^0.3.2",
     "@nestjs/apollo": "^13.2.1",
     "@nestjs/common": "^11.0.1",
@@ -32,7 +34,6 @@
     "@nestjs/jwt": "^11.0.1",
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.0.1",
-    "apollo-server-express": "^3.13.0",
     "axios": "^1.13.2",
     "bcrypt": "^6.0.0",
     "class-transformer": "^0.5.1",
@@ -40,9 +41,10 @@
     "graphql": "^16.12.0",
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.2",
-    "npm": "^11.6.2",
+    "npm": "^11.6.0",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "ts-morph": "^25.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
@@ -59,12 +61,12 @@
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.2",
     "globals": "^16.0.0",
-    "jest": "^30.0.0",
+    "jest": "^25.0.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.4.2",
     "source-map-support": "^0.5.21",
     "supertest": "^7.0.0",
-    "ts-jest": "^29.2.5",
+    "ts-jest": "^29.1.2",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
