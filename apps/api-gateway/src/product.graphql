@@ -1,0 +1,52 @@
+type Product {
+  id: ID!
+  name: String!
+  desc: String!
+  price: Float!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type PaginatedProducts {
+  items: [Product!]!
+  total: Int!
+  page: Int!
+  pageSize: Int!
+}
+
+input ProductFilter {
+  q: String
+  minPrice: Float
+  maxPrice: Float
+}
+
+input PagingInput {
+  page: Int = 1
+  pageSize: Int = 10
+}
+
+input CreateProductInput {
+  name: String!
+  description: String
+  price: Float!
+}
+
+input UpdateProductInput {
+  name: String
+  description: String
+  price: Float
+}
+
+type Query {
+  product(id: ID!): Product
+  products(
+    paging: PagingInput
+    filter: ProductFilter
+  ): PaginatedProducts!
+}
+
+type Mutation {
+  createProduct(input: CreateProductInput!): Product!
+  updateProduct(id: ID!, input: UpdateProductInput!): Product!
+  deleteProduct(id: ID!): Boolean!
+}
